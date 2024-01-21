@@ -1,7 +1,9 @@
 import { Breadcrumb, BreadcrumbItem } from 'flowbite-react';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
 import Resource from '@/components/macro/Resource';
+import { ResourceSkeleton } from '@/components/macro/Skeletons';
 
 export default async function Page(){
 
@@ -19,10 +21,13 @@ export default async function Page(){
     
      
 
-    <h1 className="scroll-m-20 pb-2 text-5xl font-semibold tracking-tight first:mt-0">
+    <h1 className="scroll-m-20 pb-2 text-2xl lg:text-5xl font-semibold tracking-tight first:mt-0">
     Curated resource list we used to fine tune our AI and more
     </h1>
         
+        <Suspense fallback={<ResourceSkeleton />}>
+        <Resource />
+        </Suspense>
        
     
        </div>

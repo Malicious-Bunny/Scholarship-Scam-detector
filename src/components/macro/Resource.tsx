@@ -1,5 +1,6 @@
-
+'use server'
 import Image from "next/image";
+
 
 interface ResourceProps {
     title: string;
@@ -8,7 +9,13 @@ interface ResourceProps {
 
 }
 
+
 export  default async function Resource(){
+
+    //waiting for 10secs to test the skeleton and suspense
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return (
         <div className="resources  flex self-start flex-col content-center">
         <div className="resource flex flex-col gap-12">
