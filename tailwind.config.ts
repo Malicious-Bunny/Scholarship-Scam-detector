@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-
+import {nextui} from "@nextui-org/react";
 const config = {
   darkMode: ["class"],
   content: [
@@ -8,6 +8,7 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     'node_modules/flowbite-react/lib/esm/**/*.js',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
 	],
   prefix: "",
   theme: {
@@ -74,8 +75,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    darkMode: "class",
   },
-  plugins: [require("tailwindcss-animate"), require('flowbite/plugin')],
+  plugins: [require("tailwindcss-animate"), require('flowbite/plugin'),nextui()],
 } satisfies Config
 
 export default config
