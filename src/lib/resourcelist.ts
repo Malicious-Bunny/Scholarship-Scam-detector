@@ -3,6 +3,45 @@ interface ResourceList {
     title: string
 }
 
+const LegitSites : Array<ResourceList> = [
+    {
+        url: "https://www.smscholarships.com/partner/search.cfm?id=52",
+        title : "SallieMae Scholarship Search "
+    },
+    {
+        url:"https://jlvcollegecounseling.com/scholarships/",
+        title: "JLV College Counseling"
+    },
+    {
+        url : "https://how2winscholarships.com/tips-on-finding-scholarships-with-fastweb/",
+        title: "Fast Webb"
+    },
+    {
+        url : "http://tracking.appily.com/aff_c?offer_id=5&aff_id=1655",
+        title: "Appily"
+    },
+    {
+        url : "http://scholarships360.org/",
+        title: "Scholarships360"
+    },
+    {
+        url : "https://www.careeronestop.org/toolkit/training/find-scholarships.aspx",
+        title: "CareerOneStop"
+    },
+    {
+        url : "https://studentscholarships.org/applyforscholarships.php",
+        title: "Student Scholarships"
+    },
+    {
+        url : "https://bigfuture.collegeboard.org/scholarship-search",
+        title: "College Board"
+    },
+    {
+        url : "https://www.scholarships.com/",
+        title: "Scholarships.com"
+    }
+]
+
 const resourceList : Array<ResourceList> = [
     {
         url : 'https://www.businessinsider.com/signs-scholarship-scam-2018-11',
@@ -35,3 +74,4 @@ const resourceList : Array<ResourceList> = [
 ]
 
 export default resourceList;
+export {LegitSites};

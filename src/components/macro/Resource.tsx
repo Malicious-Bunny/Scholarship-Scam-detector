@@ -1,33 +1,34 @@
 import * as cheerio from 'cheerio';
+
 async function getMetadata(url: string) {
 
-        const scraperapiClient = require('scraperapi-sdk')(process.env.SCRAPER_API_KEY)
-        const params = {
-        render: true,
-        country_code: 'us'
-        }
+        
         let title : string | undefined = ''
         let description : string | undefined = ''  
         let imageUrl : string | undefined = ''
 
-        await scraperapiClient.get(url, params)
+        fetch(`http://api.scraperapi.com/?api_key=${process.env.SCRAPER_API_KEY}&url=${url}&render=true`,
+        
+        //nextjs revalidate after 1 day
+        { cache: 'force-cache'}
+        )
         .then(response => {
-        
         //parse metadata with cheerio
-        const $ = cheerio.load(response.body)
-         description = $('meta[property="og:description"]').attr('content')
-         imageUrl = $('meta[property="og:image"]').attr('content')
+            response.text().then((html) => {
+                //parse metadata with cheerio
+                const $ = cheerio.load(html);
+                title = $('meta[property="og:title"]').attr('content') || $('title').text();
+                description = $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content');
+                imageUrl = $('meta[property="og:image"]').attr('content');
 
-
-        
-
-        return {title,description,imageUrl};
+                return {title,description,imageUrl};
+            })
 
         })
         .catch(error => {
         console.log(error)
         })
-  
+        
         return {title,description,imageUrl};
 }
 

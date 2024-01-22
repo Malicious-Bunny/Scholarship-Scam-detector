@@ -52,6 +52,12 @@ export default async function Page(){
     <AccordionContent className="text-md lg:text-xl">
     A: We regularly update our AI model to stay ahead of emerging scam tactics. Our team monitors the evolving landscape of online scams and incorporates new patterns and red flags into the detection algorithms. Users can expect continuous improvements to enhance the accuracy of the scam detection system.</AccordionContent>
   </AccordionItem>
+  <AccordionItem value="question-6">
+    <AccordionTrigger className='text-lg lg:text-2xl text-start text-ellipsis  text-bold'>Can the AI detector be used for other types of online scams?</AccordionTrigger>
+    <AccordionContent className="text-md lg:text-xl">
+    A: While our primary focus is on scholarship-related scams, the underlying principles of the AI scam detector can be adapted to identify red flags in other types of online scams. We are continually refining and expanding our algorithms to cover a broader range of fraudulent activities.
+    </AccordionContent>
+      </AccordionItem>
 </Accordion>
         </div>
         </main>
