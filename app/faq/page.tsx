@@ -21,12 +21,12 @@ export default async function Page(){
     </Breadcrumb>
                 </div>
         
-                <h1 className="scroll-m-20 pb-2 text-2xl lg:text-5xl font-semibold tracking-tight first:mt-0">
+                <h1 className="scroll-m-20 pb-2 md:text-4xl text-2xl lg:text-5xl font-semibold tracking-tight first:mt-0">
    Frequently Asked Questions
     </h1>
-    <Accordion className='w-full mt-12' type="multiple" >
+    <Accordion className='w-full md:mt-9 mt-2 lg:mt-12' type="multiple" >
   <AccordionItem value="question">
-    <AccordionTrigger className='text-lg lg:text-2xl text-bold'>What is scam detection AI?</AccordionTrigger>
+    <AccordionTrigger className='text-lg lg:text-2xl text-bold'>What is scam detector AI?</AccordionTrigger>
     <AccordionContent className="text-md lg:text-xl">
       A:It is an AI based on a fine tuned gpt-3-1106 model. Trained using data from scam scholarship sites
     </AccordionContent>
@@ -38,7 +38,7 @@ export default async function Page(){
      </AccordionContent>
   </AccordionItem>
   <AccordionItem value="question-3">
-    <AccordionTrigger className='text-lg lg:text-2xl text-bold'>What  red flags does the AI look out for?</AccordionTrigger>
+    <AccordionTrigger className='text-lg lg:text-2xl text-start text-ellipsis  text-bold'>What  red flags does the AI look out for?</AccordionTrigger>
     <AccordionContent className="text-md lg:text-xl">
    A:The AI examines several indicators, including the sites security status, domain legitimacy (.org, for example), the appearance of the website (dated UI), outdated copyright information, and the presence of fees for applying to scholarships. It also flags unsolicited offers and recommends contacting organizations directly for verification.  </AccordionContent>
   </AccordionItem>

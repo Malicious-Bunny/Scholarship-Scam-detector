@@ -24,7 +24,7 @@ export  default async function Page(){
        <div className="w-full mt-6 lg:mt-12 lg:w-[70%]">
        <Card className=" w-full ">
       <CardHeader>
-        <CardTitle>Paste the link in this input box</CardTitle>
+        <CardTitle className=" text-2xl font-bold">Paste the link in this input box</CardTitle>
         <CardDescription>Copy the link from the address bar, where you found the offer</CardDescription>
       </CardHeader>
       <CardContent className="grid mt-4 gap-4">

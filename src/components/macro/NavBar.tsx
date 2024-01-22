@@ -31,7 +31,7 @@ return (
        
             <nav className="relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center">
             <div className="flex items-center min-w-max relative">
-                    <Link href="#" className="font-semibold flex items-center gap-x-2">
+                    <Link href="/" className="font-semibold flex items-center gap-x-2">
                         <div className="flex items-center -space-x-3">
                             <span className="h-6 aspect-square bg-purple-600 dark:bg-purple-500 rounded-full flex" />
                             <span className="h-6 aspect-square bg-pink-600 dark:bg-pink-400 blur rounded-full flex" />

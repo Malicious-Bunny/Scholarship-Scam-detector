@@ -1,39 +1,57 @@
-'use server'
-import Image from "next/image";
+import * as cheerio from 'cheerio';
+async function getMetadata(url: string) {
+
+        const scraperapiClient = require('scraperapi-sdk')(process.env.SCRAPER_API_KEY)
+        const params = {
+        render: true,
+        country_code: 'us'
+        }
+        let title : string | undefined = ''
+        let description : string | undefined = ''  
+        let imageUrl : string | undefined = ''
+
+        await scraperapiClient.get(url, params)
+        .then(response => {
+        
+        //parse metadata with cheerio
+        const $ = cheerio.load(response.body)
+         description = $('meta[property="og:description"]').attr('content')
+         imageUrl = $('meta[property="og:image"]').attr('content')
 
 
-interface ResourceProps {
-    title: string;
-    link: string;
-    description: string;
+        
 
+        return {title,description,imageUrl};
+
+        })
+        .catch(error => {
+        console.log(error)
+        })
+  
+        return {title,description,imageUrl};
 }
 
+export   default async function Resource({title,url}:{title:string,url:string}){
 
-export  default async function Resource(){
+    const {description,imageUrl} = await getMetadata(url);
 
-    //waiting for 10secs to test the skeleton and suspense
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
+   
     return (
         <div className="resources  flex self-start flex-col content-center">
-        <div className="resource flex flex-col gap-12">
+        <div className="resource flex flex-col gap-4 lg:gap-2">
     
-        <h3 className="scroll-m-20 text-blue-600 underline underline-offset-4 text-2xl text-start font-semibold tracking-tight">
-      The Joke Tax
-    </h3>
+        <a href={url} className="scroll-m-20 content-center gap-1 flex flex-row text-blue-600 underline underline-offset-4 text-2xl text-start font-semibold tracking-tight">
+      {title} <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 hidden lg:block self-center">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+    </svg>
+
+    </a>
       
 
-      <Image
-       src='/next.svg'
-         alt='Next UI'
-            width={500}
-            height={500}
-        className=''
-        />
+      <img src={imageUrl} alt="Loading"/>
         <div className='descro '>
-            <p className=' font-thin text-primary'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui eaque atque ex iusto, facilis quas laborum minima? Nostrum aliquam vel ipsa quaerat saepe, numquam labore necessitatibus, deleniti vero at laudantium.</p> </div>
+            <p className=' font-thin text-primary'>{description}</p> </div>
         </div>
     </div>
     )

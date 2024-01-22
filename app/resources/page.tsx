@@ -4,8 +4,13 @@ import { Suspense } from 'react';
 
 import Resource from '@/components/macro/Resource';
 import { ResourceSkeleton } from '@/components/macro/Skeletons';
+import resourceList from '@/lib/resourcelist';
+
 
 export default async function Page(){
+
+
+  
 
     return (
         <main className=" p-3 w-full h-full flex flex-col items-center justify-center ">
@@ -21,13 +26,19 @@ export default async function Page(){
     
      
 
-    <h1 className="scroll-m-20 pb-2 text-2xl lg:text-5xl font-semibold tracking-tight first:mt-0">
+    <h1 className="scroll-m-20 pb-2 text-3xl lg:text-5xl font-semibold tracking-tight first:mt-0">
     Curated resource list we used to fine tune our AI and more
     </h1>
         
-        <Suspense fallback={<ResourceSkeleton />}>
-        <Resource />
-        </Suspense>
+        {
+            resourceList.map((resource,index) => {
+                return (
+                    <Suspense key={index+2} fallback={<ResourceSkeleton/>}>
+                    <Resource key={index} title={resource.title} url={resource.url}/>
+                    </Suspense>
+                )
+            })
+        }
        
     
        </div>
