@@ -12,12 +12,12 @@ export async function TestAI() {
     try{
         const completion = await openai.chat.completions.create({
             messages: [{ role: "system", content: "How would I go about fine tuning a LLM" }],
-            model: "gpt-3.5-turbo",
+            model: "gpt-4",
           });
           console.log(completion.choices[0].message.content);
     }
     catch(e){
-        console.log("Belibi")
+        console.log(e)
     }
 
 

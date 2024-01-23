@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Scholarship Scam detector AI',
   description: 'AI trained to detect scholarship scams, using a fine-tuned GPT-3 model.',
+  
 }
 
 export default function RootLayout({
