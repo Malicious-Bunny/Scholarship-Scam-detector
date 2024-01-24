@@ -43,15 +43,15 @@ return (
           absolute top-full left-0 bg-white dark:bg-gray-950 dark:lg:bg-transperent lg:bg-transparent border-b border-gray-200 dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none w-full lg:top-0 lg:relative lg:w-max lg:flex lg:transition-none duration-300 ease-linear gap-x-6
           ${navIsOpened ? "visible opacity-100 translate-y-0" : "translate-y-10 opacity-0 invisible lg:visible lg:translate-y-0 lg:opacity-100"}
           `}>
-                    <ul className="flex flex-col lg:flex-row gap-12 lg:items-center text-gray-700 dark:text-gray-300 lg:w-full lg:justify-center">
+                    <ul className="flex  flex-col lg:flex-row gap-12 lg:items-center text-gray-700 dark:text-gray-300 lg:w-full lg:justify-center">
                         <li>
-                            <Link href="/" className={`relative py-2.5 duration-300 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/")? "after:scale-x-100":"after:scale-x-0"}`}>AI</Link>
+                            <Link href="/" className={`relative py-2.5 duration-300 p-4 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-1 after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/")? "after:scale-x-100":"after:scale-x-0"}`}>AI</Link>
                         </li>
                         <li>
-                            <Link href="/resources" className={`relative py-2.5 duration-300 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/resources")? "after:scale-x-100":"after:scale-x-0"}`}>Resources</Link>
+                            <Link href="/resources" className={`relative py-2.5 duration-300 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-1 after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/resources")? "after:scale-x-100":"after:scale-x-0"}`}>Resources</Link>
                         </li>
                         <li>
-                            <Link href="/faq" className={`relative py-2.5 duration-300 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/faq")? "after:scale-x-100":"after:scale-x-0"}`}>FAQ</Link>
+                            <Link href="/faq" className={`relative py-2.5 p-1 duration-300 ease-linear hover:text-primary after:absolute after:w-full after:left-0 after:bottom-0 after:h-1 after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-x-100 after:bg-accent-foreground ${isActive("/faq")? "after:scale-x-100":"after:scale-x-0"}`}>FAQ</Link>
                         </li>
                         <li>
                             <ModeToggle />

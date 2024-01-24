@@ -4,7 +4,7 @@ import OpenAI from "openai";
 
 
 
-export async function TestAI() {
+export async function TestAI(formdata : FormData) {
 
     const APiKEY = process.env.OPENAI_API_KEY;
 
@@ -12,9 +12,10 @@ export async function TestAI() {
     try{
         const completion = await openai.chat.completions.create({
             messages: [{ role: "system", content: "How would I go about fine tuning a LLM" }],
-            model: "gpt-4",
+            model: "gpt-3.5-turbo-1106",
           });
-          console.log(completion.choices[0].message.content);
+          //logging the input value from the form data
+            console.log(formdata.get("link"))
     }
     catch(e){
         console.log(e)

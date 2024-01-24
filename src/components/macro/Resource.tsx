@@ -1,40 +1,47 @@
+"use server"
 import * as cheerio from 'cheerio';
+import Image from 'next/image'
 
 async function getMetadata(url: string) {
 
-        
-        let title : string | undefined = ''
-        let description : string | undefined = ''  
-        let imageUrl : string | undefined = ''
+            const axios = require('axios');
+try{
+            const {data} = await axios.get(url);
 
-        fetch(`http://api.scraperapi.com/?api_key=${process.env.SCRAPER_API_KEY}&url=${url}&render=true`,
-        
-        //nextjs revalidate after 1 day
-        { cache: 'force-cache'}
-        )
-        .then(response => {
-        //parse metadata with cheerio
-            response.text().then((html) => {
-                //parse metadata with cheerio
-                const $ = cheerio.load(html);
-                title = $('meta[property="og:title"]').attr('content') || $('title').text();
-                description = $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content');
-                imageUrl = $('meta[property="og:image"]').attr('content');
+            let title : string | undefined = ''
+            let description : string | undefined = ''  
+            let imageUrl : string | undefined = ''
 
-                return {title,description,imageUrl};
-            })
+       
+            const $ = cheerio.load(data);
+            title = $('meta[property="og:title"]').attr('content') || $('title').text();
+            description = $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content');
+            imageUrl = $('meta[property="og:image"]').attr('content');
 
-        })
-        .catch(error => {
-        console.log(error)
-        })
+           
+           if(description && imageUrl){
+            return {description, imageUrl};
+           }else{
+            description = ""
+            imageUrl = ""
+
+            return {description, imageUrl};
+           }
+          }
+            catch(e){
+                
+            }
+                
+            
+            
+      
         
-        return {title,description,imageUrl};
 }
 
-export   default async function Resource({title,url}:{title:string,url:string}){
+export default async function Resource({title,url}:{title:string,url:string}){
 
-    const {description,imageUrl} = await getMetadata(url);
+  
+    //const {description,imageUrl} = await getMetadata(url);
 
 
    
@@ -50,9 +57,14 @@ export   default async function Resource({title,url}:{title:string,url:string}){
     </a>
       
 
-      <img src={imageUrl} alt="Loading"/>
+      <Image
+        src={""}
+        alt="Picture of the author"
+        width={500}
+        height={200}
+        />
         <div className='descro '>
-            <p className=' font-thin text-primary'>{description}</p> </div>
+            <p className=' font-thin text-primary'>{""}</p> </div>
         </div>
     </div>
     )

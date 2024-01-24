@@ -28,7 +28,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className=" w-screen py-3 sticky top-0 z-40 flex flex-row justify-center  border-b-2 border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <header className=" w-screen  sticky top-0 z-40 flex flex-row justify-center  border-b-2 border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <NavBar />
         </header>
             {children}

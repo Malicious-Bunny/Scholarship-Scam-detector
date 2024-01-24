@@ -26,7 +26,7 @@ export default function TypewriterEffect({ text, speed = 50 }:TypeWriterProps){
   }, [index,text, speed]);
 
   return (
-    <span className="text-primary will-change-scroll font-normal text-xl lg:text-2xl">
+    <span className="text-primary will-change-scroll font-normal text-lg lg:text-xl">
       {displayedText}
        </span>
   );
