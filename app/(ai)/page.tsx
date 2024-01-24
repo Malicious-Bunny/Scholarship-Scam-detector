@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
 import { TestAI } from "@/actions/testAPI";
 import {
@@ -11,16 +11,29 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SiOpenai } from "react-icons/si";
-import {CircularProgress} from "@nextui-org/react";
-import TypewriterEffect from "@/components/micro/TypewritterEffect";
+import { useState } from "react";
 import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
+import ResultCard from "@/components/micro/ResultCard";
+import {CircularProgress} from "@nextui-org/react";
 
 export default function Page() {
+  interface initialState {
+    description: string;
+    link: string;
+    errors : string;
+  }
 
-  const Pending = useFormStatus();
-  
-  
+  const initial: initialState = {
+    description: "",
+    link: "",
+    errors : ""
+  };
+
+  const { pending } = useFormStatus();
+  const [state, payload] = useFormState(TestAI, initial);
+  const [edit, setEdit]  = useState<string>("");
+
   return (
     <main className=" w-full  flex flex-col items-center justify-center content-center">
       <div className="w-full items-center flex flex-col justify-center content-center dark:bg-gradient-to-r dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 self-center p-7 lg:p-9 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-indigo-500">
@@ -28,68 +41,70 @@ export default function Page() {
           Powered by openai <SiOpenai className="w-5 h-5" />{" "}
         </span>
       </div>
-      <div className=" w-full lg:w-[80vw] mt-6 gap-16 flex p-4 flex-col items-center content-center h-screen">
-        <div className="w-full mt-6 lg:mt-12 lg:w-[70%]">
-          <Card className=" w-full ">
-            <form action={TestAI}>
+      <form action={payload}>
+        <div className=" w-full lg:w-[80vw] mt-6 gap-16 flex p-4 flex-col items-center content-center h-screen">
+          <div className="w-full mt-6 lg:mt-12 lg:w-[70%]">
+            <Card className=" w-full ">
               <CardHeader>
                 <CardTitle className=" text-2xl font-bold">
-                  Paste the link in this input box
+                  Paste the link in this input box 
                 </CardTitle>
                 <CardDescription>
                   Copy the link from the address bar, where you found the offer
                 </CardDescription>
               </CardHeader>
               <CardContent className="grid mt-4 gap-4">
-               
-               {/*create an input component linked to the button for form submission*/ }
+                {/*create an input component linked to the button for form submission*/}
                 <Input
                   type="text"
+                  value={edit}
+                  onChange={
+                    (e)=>{
+                      setEdit(e.target.value)
+                    }
+                  }
                   placeholder="https://www.example.com"
                   name="link"
-                  required
                   className="w-full"
                 />
+                 {state?.errors && <p  className="leading-7 text-danger">
+                    Please enter a valid link
+                 </p>}
+              </CardContent>
 
-                </CardContent>
               <CardFooter className=" mt-4">
-                <Button type="submit">Evaluate</Button>
+                <SubmitButton state={edit} />
               </CardFooter>
-            </form>
-          </Card>
+            </Card>
+          </div>
+          <ResultCard
+            percentage={
+              state?.link ??
+              "Enter a link to see results. "
+            }
+            description={
+              state?.link ??
+              "Enter a link to see results. "
+            }
+          />
         </div>
-
-
-
-        <div className=" w-full lg:w-[70%]">
-          <Card className=" w-full ">
-            <CardHeader>
-            <CardTitle className=" text-2xl font-bold">
-                Results</CardTitle>
-            </CardHeader>
-          { Pending && <CardContent className="flex  flex-col gap-8 mt-4 justify-center content-center">
-          { /* <p className="leading-7 text-muted-foreground [&:not(:first-child)]:mt-6">
-              Enter a link to see results
-</p> */}    
-              <CircularProgress
-              className="self-center"
-                        classNames={{
-                        svg: "w-32 h-32 drop-shadow-md",
-                        value: "text-3xl font-semibold dark:text-white text-black",
-                      }}
-                aria-label="Loading..."
-                value={80}
-                color="success"
-                
-                showValueLabel={true}
-              />
-
-              <TypewriterEffect text="Scams are bad scams are bad your scam is bad its really bad really really bad bad bad bad bad bad bad bad Scams are bad scams are bad your scam is bad its really bad really really bad bad bad bad bad bad bad bad Scams are bad scams are bad your scam is bad its really bad really really bad bad bad bad bad bad bad bad bad" speed={70} />
-          </CardContent>}
-            <CardFooter></CardFooter>
-          </Card>
-        </div>
-      </div>
+      </form>
     </main>
+  );
+}
+
+function SubmitButton({state}:{state:string}) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button disabled={
+      state.length<1? true:false
+    } type="submit">
+      Evaluate {pending == true &&  <CircularProgress className="ml-2 mr-1" classNames={
+        { svg: "w-3 h-3 drop-shadow-md",
+         indicator: "stroke-white",
+         track: "stroke-black"}
+      }  color="default" aria-label="Loading..."/>}
+    </Button>
   );
 }
