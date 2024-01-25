@@ -31,28 +31,29 @@ export async function TestAI(previousState : any,formdata : FormData) {
 
            if(!LinkValidator(Data)){
                 revalidatePath('/')
-                return {description : "Baboo",
-                link: "Please enter a valid link",
+                return {
                 errors: "Invalid Link"
            }}
 
             revalidatePath('/')
             return {
-            link: Data
+              percent : 60,
+            description : "Testing your scam, gullible fool",
+            link: Data,
         };
     }
     catch(e){
         console.log(e)
         revalidatePath('/')
-        return {description : "Baboo",
-        link: "Error"
+        return {
+          percent : 0,
+        description : "Error in testing your scam, gullible fool",
+        link: "Error",
+        errors: "Error"
     };
 
 
     }
-  return {description : "Baboo",
-            link: "Magri",
-            errors: "No errors"
-        };
+
 
 }

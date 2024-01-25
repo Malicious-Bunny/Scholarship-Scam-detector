@@ -17,14 +17,17 @@ import { useFormStatus } from "react-dom";
 import ResultCard from "@/components/micro/ResultCard";
 import {CircularProgress} from "@nextui-org/react";
 
+
 export default function Page() {
   interface initialState {
+    percent : number;
     description: string;
     link: string;
     errors : string;
   }
 
   const initial: initialState = {
+    percent: 0,
     description: "",
     link: "",
     errors : ""
@@ -70,6 +73,8 @@ export default function Page() {
                  {state?.errors && <p  className="leading-7 text-danger">
                     Please enter a valid link
                  </p>}
+                
+                 
               </CardContent>
 
               <CardFooter className=" mt-4">
@@ -79,11 +84,11 @@ export default function Page() {
           </div>
           <ResultCard
             percentage={
-              state?.link ??
-              "Enter a link to see results. "
+              state?.percent ??
+              0
             }
             description={
-              state?.link ??
+              state?.description ??
               "Enter a link to see results. "
             }
           />
@@ -100,7 +105,7 @@ function SubmitButton({state}:{state:string}) {
     <Button disabled={
       state.length<1? true:false
     } type="submit">
-      Evaluate {pending == true &&  <CircularProgress className="ml-2 mr-1" classNames={
+      {pending == true? "Evaluating...": "Evaluate"} {pending == true &&  <CircularProgress className="ml-2 mr-1" classNames={
         { svg: "w-3 h-3 drop-shadow-md",
          indicator: "stroke-white",
          track: "stroke-black"}

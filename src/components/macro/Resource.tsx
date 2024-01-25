@@ -1,47 +1,11 @@
 "use server"
-import * as cheerio from 'cheerio';
 import Image from 'next/image'
 
-async function getMetadata(url: string) {
 
-            const axios = require('axios');
-try{
-            const {data} = await axios.get(url);
-
-            let title : string | undefined = ''
-            let description : string | undefined = ''  
-            let imageUrl : string | undefined = ''
-
-       
-            const $ = cheerio.load(data);
-            title = $('meta[property="og:title"]').attr('content') || $('title').text();
-            description = $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content');
-            imageUrl = $('meta[property="og:image"]').attr('content');
-
-           
-           if(description && imageUrl){
-            return {description, imageUrl};
-           }else{
-            description = ""
-            imageUrl = ""
-
-            return {description, imageUrl};
-           }
-          }
-            catch(e){
-                
-            }
-                
-            
-            
-      
-        
-}
-
-export default async function Resource({title,url}:{title:string,url:string}){
+export default async function Resource({title,url,imageUrl, description}:{title:string,url:string, imageUrl:string,description:string}){
 
   
-    //const {description,imageUrl} = await getMetadata(url);
+   // const {description,imageUrl} = await getMetadata(url);
 
 
    
@@ -57,14 +21,14 @@ export default async function Resource({title,url}:{title:string,url:string}){
     </a>
       
 
-      <Image
-        src={""}
+      <img
+        src={imageUrl}
         alt="Picture of the author"
-        width={500}
-        height={200}
+        width={1500}
+        height={500}
         />
         <div className='descro '>
-            <p className=' font-thin text-primary'>{""}</p> </div>
+            <p className=' font-thin text-primary'>{description}</p> </div>
         </div>
     </div>
     )
