@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 interface TypeWriterProps{
+  
     text:string,
     speed:number
 }
@@ -11,7 +12,7 @@ export default function TypewriterEffect({ text, speed = 50 }:TypeWriterProps){
   let index = 0;
 
   if(text.length < 1){
-    text = "Enter a link to see results"
+    text = "None"
   }
  
   useEffect(() => {

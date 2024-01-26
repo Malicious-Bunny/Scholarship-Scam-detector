@@ -16,9 +16,10 @@ import { useFormStatus } from "react-dom";
 interface Resultprops{
     percentage: number ;
     description: string ;
+    advice: string;
    
 }
-export default function ResultCard({percentage, description}:Resultprops){
+export default function ResultCard({percentage, description, advice}:Resultprops){
     const {pending} = useFormStatus();
     function EvaluateStrokeFromPercent(percent:number){
         if(percent <= 25){
@@ -31,9 +32,10 @@ export default function ResultCard({percentage, description}:Resultprops){
             return "stroke-green-500"
         }
     }
+
     return (
-        <div className=" w-full lg:w-[70%]">
-        <Card className=" w-full ">
+        <div className=" w-full  lg:w-[70%]">
+        <Card className=" w-full">
           <CardHeader>
           <CardTitle className=" text-2xl font-bold">
               Results</CardTitle>
@@ -53,10 +55,18 @@ export default function ResultCard({percentage, description}:Resultprops){
                   aria-label="Loading..."
                   value={percentage}
                   color="success"
+                  label={`Your scholarship is ${percentage} percent authentic`}
                 
                   showValueLabel={true}
                 />
-                <TypewriterEffect text={description} speed={70} />
+                <div  className="flex flex-col gap-1  justify-center content-center">
+                    <p className="leading-7 text-muted-foreground [&:not(:first-child)]:mt-6">Red Flags: </p>
+                    <TypewriterEffect text={description} speed={40} />
+                </div>
+                <div  className="flex flex-col gap-1 justify-center content-center">
+                    <p className="leading-7 text-muted-foreground [&:not(:first-child)]:mt-6">Advice: </p>
+                    <TypewriterEffect text={advice} speed={40} />
+                </div>
             </div>
             : 
                 <p className="leading-7 text-muted-foreground [&:not(:first-child)]:mt-6">

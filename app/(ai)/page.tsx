@@ -22,6 +22,7 @@ export default function Page() {
   interface initialState {
     percent : number;
     description: string;
+    advice:string;
     link: string;
     errors : string;
   }
@@ -29,6 +30,7 @@ export default function Page() {
   const initial: initialState = {
     percent: 0,
     description: "",
+    advice: "",
     link: "",
     errors : ""
   };
@@ -45,8 +47,8 @@ export default function Page() {
         </span>
       </div>
       <form action={payload}>
-        <div className=" w-full lg:w-[80vw] mt-6 gap-16 flex p-4 flex-col items-center content-center h-screen">
-          <div className="w-full mt-6 lg:mt-12 lg:w-[70%]">
+        <div className=" w-full lg:w-[80vw] mb-4 lg:mt-3 mt-6 gap-16 flex p-4 flex-col items-center content-center h-screen">
+          <div className="w-full mt-3 lg:mt-12 lg:w-[70%]">
             <Card className=" w-full ">
               <CardHeader>
                 <CardTitle className=" text-2xl font-bold">
@@ -89,7 +91,11 @@ export default function Page() {
             }
             description={
               state?.description ??
-              "Enter a link to see results. "
+              "Enter a valid link to see results. "
+            }
+            advice={ 
+              state?.advice ??
+              "Enter a valid link to see results. "
             }
           />
         </div>
@@ -103,7 +109,7 @@ function SubmitButton({state}:{state:string}) {
 
   return (
     <Button disabled={
-      state.length<1? true:false
+      state.length<1 || pending == true ? true:false
     } type="submit">
       {pending == true? "Evaluating...": "Evaluate"} {pending == true &&  <CircularProgress className="ml-2 mr-1" classNames={
         { svg: "w-3 h-3 drop-shadow-md",
