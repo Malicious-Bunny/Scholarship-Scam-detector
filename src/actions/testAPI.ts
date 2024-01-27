@@ -102,11 +102,7 @@ export async function TestAI(previousState : any,formdata : FormData) {
 
          const message =  completion.choices[0].message.content;
 
-           if(!LinkValidator(Data)){
-                revalidatePath('/')
-                return {
-                errors: "Invalid Link"
-           }}else if(MatchNo(message)){
+          if(MatchNo(message)){
 
             revalidatePath('/')
             return {

@@ -91,7 +91,7 @@ export default function Page() {
             }
             description={
               state?.description ??
-              "Enter a valid link to see results. "
+              "None"
             }
             advice={ 
               state?.advice ??
