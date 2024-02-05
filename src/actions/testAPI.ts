@@ -6,6 +6,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 
 export async function TestAI(previousState : any,formdata : FormData) {
+  
     function MatchNo(message:string|null){
        const regex =  /^(no)$/i;
 
@@ -65,13 +66,12 @@ export async function TestAI(previousState : any,formdata : FormData) {
 
         return JSON.stringify(responseOBJ)
       } catch (error) {
-          console.error(`Error scraping ${url}: `, error);
           const responseOBJ = {
         };
           return JSON.stringify(responseOBJ)
       }
   }
-    const APiKEY = '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'
+    const APiKEY = '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'
     const openai = new OpenAI({apiKey: APiKEY });
     const system : string = "You are a scholarship in link detector. You consume links and return a yes or no based on whether or not the link has something to do with scholarships. Do just that. Respond with nothing but yes or no"
     const RealSystem : string =
@@ -106,7 +106,7 @@ export async function TestAI(previousState : any,formdata : FormData) {
 
             revalidatePath('/')
             return {
-              percent : 0,
+            percent : 0,
             description : "Hmm, seems like this link does not lead to a scholarship offer", 
             link: Data,}
 
@@ -131,7 +131,7 @@ export async function TestAI(previousState : any,formdata : FormData) {
              }
               revalidatePath('/')
               return {
-                percent : messageJson.percentage,
+              percent : messageJson.percentage,
               description : messageJson.redflags.join(', '),
               advice: messageJson.advice.join(', '),
               link: Data,
